@@ -24,5 +24,13 @@ Feature: E-commerce validation
       | expectedOrderSummaryPageTitle |
       | order summary                 |
     
+
+  @api
+  Scenario: Placing order without login in UI
+    Given User opens the shopping page
+    When User search for the newly created order via API in the Orders page and view its details
+    Then Order details will be displayed correctly in the Order Summary page for orders created in API
+      | expectedOrderSummaryPageTitle |
+      | order summary                 |
    
    

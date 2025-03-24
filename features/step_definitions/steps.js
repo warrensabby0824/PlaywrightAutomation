@@ -98,3 +98,37 @@ Given('User login to the application with {string} and {string}',{timeout:100*10
     await expect (this.page.locator("[style*='block']")).toContainText("Incorrect");
       
     });
+
+
+    Given('User opens the shopping page',{timeout:100*1000}, async function () {
+
+      this.loginPage = this.poManager.getLoginPage();
+      this.dashboardPage = this.poManager.getDashboardPage();
+      this.ordersListPage = this.poManager.getOrdersListPage();
+      this.orderSummaryPage = this.poManager.getOrderSummaryPage();
+     
+      await this.page.addInitScript(value => {
+
+        window.localStorage.setItem('token',value);
+
+    }, this.token);
+      
+      await this.loginPage.goToLoginPage();
+
+    });
+
+    When('User search for the newly created order via API in the Orders page and view its details',{timeout:100*1000}, async function () {
+      await this.dashboardPage.goToOrders();
+      await this.ordersListPage.searchForOrder(this.orderID);
+    });
+
+
+    Then('Order details will be displayed correctly in the Order Summary page for orders created in API', async function (dataTable) {
+      const data = dataTable.hashes();
+      for (const row of data) {
+      const orderSummaryTitle = await this.orderSummaryPage.extractOrderSummaryTitle();
+      await expect (orderSummaryTitle.trim()).toEqual(row.expectedOrderSummaryPageTitle);
+      const actualOrderNumber = await this.orderSummaryPage.extractOrderNumber();
+      await expect (actualOrderNumber).toEqual(this.orderID);
+      }
+    });
