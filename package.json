@@ -6,8 +6,8 @@
     "test": "npx playwright test tests/webapi3.spec.js --headed",
     "webTest": "npx playwright test --grep=@warren",
     "apiTest": "npx playwright test --grep=@API",
-    "wamTest": "cucumber-js --tags=@ErrorValidation --exit",
-    "wamAPITest": "cucumber-js --tags=@api --exit"
+    "wamTest": "npx cucumber-js --tags=@ErrorValidation --exit",
+    "wamAPITest": "npx cucumber-js --tags=@api --exit"
   },
   "keywords": [],
   "author": "",
