@@ -19,7 +19,7 @@ Given('User login to the application with {string} and {string}',{timeout:100*10
   this.orderConfirmationPage = this.poManager.getOrderConfirmationPage();
   this.ordersListPage = this.poManager.getOrdersListPage();
   this.orderSummaryPage = this.poManager.getOrderSummaryPage();
-
+  console.log(process.env.URL);
   await this.loginPage.goToLoginPage();
   await this.loginPage.validLogin(username, password);
 

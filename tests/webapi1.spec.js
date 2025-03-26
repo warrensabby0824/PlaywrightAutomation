@@ -1,3 +1,5 @@
+//calling APIUTILS and updating token to have access in the application
+
 const { test, expect, request} = require('@playwright/test');
 const {APIUtils} = require('../utils/APIUtils');
 const loginPayLoad = {userEmail: "ysabella.deleon@gmail.com", userPassword: "Sabsab1234"}
@@ -25,7 +27,7 @@ test('@API Web Client App login', async ({ page }) => {
         window.localStorage.setItem('token',value);
 
     }, token);
-
+    console.log(process.env.URL);
     await page.goto("https://rahulshettyacademy.com/client/");
     await page.locator("button[routerlink*='myorders']").click();
  

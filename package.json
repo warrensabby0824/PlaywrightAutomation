@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "npx playwright test tests/webapi3.spec.js --headed",
+    "wamtest": "npx playwright test tests/webapi3.spec.js --headed",
     "webTest": "npx playwright test --grep=@warren",
     "apiTest": "npx playwright test --grep=@API",
     "wamTest": "npx cucumber-js --tags=@ErrorValidation --exit",
@@ -13,12 +13,15 @@
   "author": "",
   "license": "ISC",
   "description": "",
-  "type":"commonjs",
+  "type": "commonjs",
   "devDependencies": {
     "@cucumber/cucumber": "^11.2.0",
     "@playwright/test": "^1.50.1",
     "@types/node": "^22.13.4",
     "allure-playwright": "^3.2.0",
     "exceljs": "^4.4.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7"
   }
 }

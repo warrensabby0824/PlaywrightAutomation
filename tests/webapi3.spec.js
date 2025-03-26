@@ -1,3 +1,5 @@
+//faking the API response to display a different page
+
 const { test, expect, request } = require('@playwright/test');
 const { APIUtils } = require('../utils/APIUtils');
 const loginPayLoad = { userEmail: "ysabella.deleon@gmail.com", userPassword: "Sabsab1234" };

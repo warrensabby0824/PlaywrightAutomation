@@ -1,4 +1,4 @@
-
+//copying current storage state then using it to login
 const { test, expect } = require('@playwright/test');
 let webContext;
 
