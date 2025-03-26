@@ -41,7 +41,7 @@ test(`Web Client App login ${data.productName} @warren`, async ({ page }) => {
    await checkoutPage.placeOrder();
 
    const thankYouMessage = await orderConfirmationPage.validateThankYouMessage();
-   await expect (thankYouMessage).toHaveText(data.expectedThankYouMessage);
+   await expect (thankYouMessage).toEqual(data.expectedThankYouMessage);
 
    orderNumber = await orderConfirmationPage.extractOrderNumber();
    await dashboardPage.goToOrders();
@@ -49,9 +49,9 @@ test(`Web Client App login ${data.productName} @warren`, async ({ page }) => {
    await ordersListPage.searchForOrder(orderNumber);
 
    const orderSummaryTitle = await orderSummaryPage.extractOrderSummaryTitle();
-   await expect (orderSummaryTitle).toHaveText(data.expectedOrderSummaryPageTitle);
+   await expect (orderSummaryTitle).toEqual(data.expectedOrderSummaryPageTitle);
    const actualOrderNumber = await orderSummaryPage.extractOrderNumber();
-   await expect (actualOrderNumber).toHaveText(orderNumber);
+   await expect (actualOrderNumber).toEqual(orderNumber);
 })
 }
 
