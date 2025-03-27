@@ -1,23 +1,23 @@
 // Generated from: features\Ecommerce.feature
-import { test } from "playwright-bdd";
+import { test } from "../../fixtures/fixtures.js";
 
 test.describe('E-commerce validation', () => {
 
-  test('Placing order', { tag: ['@Regression'] }, async ({ Given, page, When, Then, And }) => { 
-    await Given('User login to the application with "ysabella.deleon@gmail.com" and "Sabsab1234"', null, { page }); 
-    await When('product "ZARA COAT 3" is added to the cart', null, { page }); 
-    await Then('verify if "ZARA COAT 3" was successfully added', null, { page }); 
-    await When('User checksout and shipping information was entered', {"dataTable":{"rows":[{"cells":[{"value":"cardExpiryMonth"},{"value":"08"}]},{"cells":[{"value":"cardExpiryDate"},{"value":"28"}]},{"cells":[{"value":"cvvCode"},{"value":"1234"}]},{"cells":[{"value":"cardName"},{"value":"Sabby De Leon"}]},{"cells":[{"value":"couponCode"},{"value":"rahulshettyacademy"}]},{"cells":[{"value":"expectedCouponMessage"},{"value":"* Coupon Applied"}]},{"cells":[{"value":"initialCountryInput"},{"value":"Ind"}]},{"cells":[{"value":"expectedCountryOutput"},{"value":"Indonesia"}]}]}}, { page }); 
-    await And('order was placed', null, { page }); 
-    await Then('Order confirmation will be successfull', {"dataTable":{"rows":[{"cells":[{"value":"expectedThankYouMessage"}]},{"cells":[{"value":"Thankyou for the order."}]}]}}, { page }); 
-    await When('User search for the newly created order in the Orders page and view its details', null, { page }); 
-    await Then('Order details will be displayed correctly in the Order Summary page', {"dataTable":{"rows":[{"cells":[{"value":"expectedOrderSummaryPageTitle"}]},{"cells":[{"value":"order summary"}]}]}}, { page }); 
+  test('Placing order', { tag: ['@Regression'] }, async ({ Given, loginPage, When, dashboardPage, Then, myCartPage, checkoutPage, And, orderConfirmationPage, ordersListPage, orderSummaryPage }) => { 
+    await Given('User login to the application with "ysabella.deleon@gmail.com" and "Sabsab1234"', null, { loginPage }); 
+    await When('product "ZARA COAT 3" is added to the cart', null, { dashboardPage }); 
+    await Then('verify if "ZARA COAT 3" was successfully added', null, { dashboardPage, myCartPage }); 
+    await When('User checksout and shipping information was entered', {"dataTable":{"rows":[{"cells":[{"value":"cardExpiryMonth"},{"value":"08"}]},{"cells":[{"value":"cardExpiryDate"},{"value":"28"}]},{"cells":[{"value":"cvvCode"},{"value":"1234"}]},{"cells":[{"value":"cardName"},{"value":"Sabby De Leon"}]},{"cells":[{"value":"couponCode"},{"value":"rahulshettyacademy"}]},{"cells":[{"value":"expectedCouponMessage"},{"value":"* Coupon Applied"}]},{"cells":[{"value":"initialCountryInput"},{"value":"Ind"}]},{"cells":[{"value":"expectedCountryOutput"},{"value":"Indonesia"}]}]}}, { myCartPage, checkoutPage }); 
+    await And('order was placed', null, { checkoutPage }); 
+    await Then('Order confirmation will be successfull', {"dataTable":{"rows":[{"cells":[{"value":"expectedThankYouMessage"}]},{"cells":[{"value":"Thankyou for the order."}]}]}}, { orderConfirmationPage }); 
+    await When('User search for the newly created order in the Orders page and view its details', null, { orderConfirmationPage, dashboardPage, ordersListPage }); 
+    await Then('Order details will be displayed correctly in the Order Summary page', {"dataTable":{"rows":[{"cells":[{"value":"expectedOrderSummaryPageTitle"}]},{"cells":[{"value":"order summary"}]}]}}, { orderSummaryPage }); 
   });
 
-  test('Placing order without login in UI', { tag: ['@api'] }, async ({ Given, page, When, Then }) => { 
-    await Given('User opens the shopping page', null, { page }); 
-    await When('User search for the newly created order via API in the Orders page and view its details', null, { page }); 
-    await Then('Order details will be displayed correctly in the Order Summary page for orders created in API', {"dataTable":{"rows":[{"cells":[{"value":"expectedOrderSummaryPageTitle"}]},{"cells":[{"value":"order summary"}]}]}}, { page }); 
+  test('Placing order without login in UI', { tag: ['@api'] }, async ({ Given, loginPage, page, When, dashboardPage, ordersListPage, Then, orderSummaryPage }) => { 
+    await Given('User opens the shopping page', null, { loginPage, page }); 
+    await When('User search for the newly created order via API in the Orders page and view its details', null, { dashboardPage, ordersListPage }); 
+    await Then('Order details will be displayed correctly in the Order Summary page for orders created in API', {"dataTable":{"rows":[{"cells":[{"value":"expectedOrderSummaryPageTitle"}]},{"cells":[{"value":"order summary"}]}]}}, { orderSummaryPage }); 
   });
 
 });

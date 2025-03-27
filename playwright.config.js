@@ -5,8 +5,10 @@ import dotenv from 'dotenv';
 import {defineBddConfig} from 'playwright-bdd';
 
 const testDir = defineBddConfig({
+  importTestFrom: 'fixtures/fixtures.js',
   paths: ['features/Ecommerce.feature'],
-  require: ['features/step_definitions/steps2.js']
+  require: ['features/step_definitions/steps2.js'],
+  disableWarnings: { importTestFrom: true }
 })
 
 dotenv.config({

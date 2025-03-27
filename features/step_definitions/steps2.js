@@ -1,5 +1,6 @@
-import { createBdd } from "playwright-bdd";
-const {Given,When,Then} = createBdd();
+import { createBdd } from 'playwright-bdd';
+import {test} from '../../fixtures/fixtures';
+const {Given,When,Then} = createBdd(test);
 const { expect, request } = require('@playwright/test');
 const { POManager } = require('../../pageobjects/POManager');
 const { APIUtils } = require('../../utils/APIUtils');
@@ -9,10 +10,7 @@ let orderNumber;
 let latestUsername;
 let orderID;
 
-Given('User login to the application with {string} and {string}', async ({page}, username, password) => {
-
-     const poManager = new POManager(page);
-     const loginPage = poManager.getLoginPage();
+Given('User login to the application with {string} and {string}', async ({loginPage}, username, password) => {
      console.log(process.env.URL);
      await loginPage.goToLoginPage();
      await loginPage.validLogin(username, password);
@@ -20,25 +18,20 @@ Given('User login to the application with {string} and {string}', async ({page},
      latestUsername = username;
    });
    
-   When('product {string} is added to the cart', async ({page}, productname) => {
-     const poManager = new POManager(page);
-     const dashboardPage = poManager.getDashboardPage();
+   When('product {string} is added to the cart', async ({dashboardPage}, productname) => {
+
      await dashboardPage.searchForProduct(productname);
    });
    
-   Then('verify if {string} was successfully added', async ({page}, productname) => {
-     const poManager = new POManager(page);
-     const dashboardPage = poManager.getDashboardPage();
-     const myCartPage = poManager.getMyCartPage();
+   Then('verify if {string} was successfully added', async ({dashboardPage,myCartPage}, productname) => {
+
      await dashboardPage.goToCart();
      const isVisibleinCart = await myCartPage.validateProductInCart(productname);
      await expect (isVisibleinCart).toBeTruthy();
    });
    
-   When('User checksout and shipping information was entered', async ({page}, dataTable) => {
-     const poManager = new POManager(page);
-     const myCartPage = poManager.getMyCartPage();
-     const checkoutPage = poManager.getCheckoutPage();
+   When('User checksout and shipping information was entered', async ({myCartPage,checkoutPage}, dataTable) => {
+
      const data = dataTable.rowsHash();
      await myCartPage.checkoutCart();
      await checkoutPage.personalInfoInput(data.cardExpiryMonth,data.cardExpiryDate,data.cvvCode,data.cardName,data.couponCode);
@@ -48,15 +41,13 @@ Given('User login to the application with {string} and {string}', async ({page},
      await expect(await checkoutPage.checkShippingEmail()).toHaveText(latestUsername);
    });
    
-   When('order was placed', async ({page}) => {
-     const poManager = new POManager(page);
-     const checkoutPage = poManager.getCheckoutPage();
+   When('order was placed', async ({checkoutPage}) => {
+
      await checkoutPage.placeOrder();
    });
    
-   Then('Order confirmation will be successfull', async ({page}, dataTable) => {
-     const poManager = new POManager(page);
-     const orderConfirmationPage = poManager.getOrderConfirmationPage();
+   Then('Order confirmation will be successfull', async ({orderConfirmationPage}, dataTable) => {
+
      const data = dataTable.hashes();
      for (const row of data) {
      const thankYouMessage = await orderConfirmationPage.validateThankYouMessage();
@@ -64,19 +55,15 @@ Given('User login to the application with {string} and {string}', async ({page},
      }
    });
    
-   When('User search for the newly created order in the Orders page and view its details', async ({page}) => {
-     const poManager = new POManager(page);
-     const orderConfirmationPage = poManager.getOrderConfirmationPage();
-     const dashboardPage = poManager.getDashboardPage();
-     const ordersListPage = poManager.getOrdersListPage();
+   When('User search for the newly created order in the Orders page and view its details', async ({orderConfirmationPage,dashboardPage,ordersListPage}) => {
+
      orderNumber = await orderConfirmationPage.extractOrderNumber();
      await dashboardPage.goToOrders();
      await ordersListPage.searchForOrder(orderNumber);
    });
    
-   Then('Order details will be displayed correctly in the Order Summary page', async ({page}, dataTable) => {
-     const poManager = new POManager(page);
-     const orderSummaryPage = poManager.getOrderSummaryPage();
+   Then('Order details will be displayed correctly in the Order Summary page', async ({orderSummaryPage}, dataTable) => {
+
      const data = dataTable.hashes();
      for (const row of data) {
      const orderSummaryTitle = await orderSummaryPage.extractOrderSummaryTitle();
@@ -86,12 +73,9 @@ Given('User login to the application with {string} and {string}', async ({page},
      }
    });
    
-   Given('User opens the shopping page', async ({page}) => {
+   Given('User opens the shopping page', async ({loginPage, page}) => {
      const apiContext = await request.newContext();
      const apiUtils = new APIUtils(apiContext);
-     
-     const poManager = new POManager(page);
-     const loginPage = poManager.getLoginPage();
 
      const token = await apiUtils.getToken(loginPayloadjson);
      orderID = await apiUtils.createOrder(orderCreationPayloadjson,token);
@@ -105,17 +89,13 @@ Given('User login to the application with {string} and {string}', async ({page},
      await loginPage.goToLoginPage();
    });
    
-   When('User search for the newly created order via API in the Orders page and view its details', async ({page}) => {
-     const poManager = new POManager(page);
-     const dashboardPage = poManager.getDashboardPage();
-     const ordersListPage = poManager.getOrdersListPage();
+   When('User search for the newly created order via API in the Orders page and view its details', async ({dashboardPage,ordersListPage}) => {
+
      await dashboardPage.goToOrders();
      await ordersListPage.searchForOrder(orderID);
    });
 
-   Then('Order details will be displayed correctly in the Order Summary page for orders created in API', async ({page}, dataTable) => {
-     const poManager = new POManager(page);
-     const orderSummaryPage = poManager.getOrderSummaryPage();
+   Then('Order details will be displayed correctly in the Order Summary page for orders created in API', async ({orderSummaryPage}, dataTable) => {
      
      const data = dataTable.hashes();
      for (const row of data) {

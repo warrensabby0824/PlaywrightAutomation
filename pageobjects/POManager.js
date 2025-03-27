@@ -3,7 +3,7 @@ const { DashboardPage } = require('../pageobjects/DashboardPage');
 const { MyCartPage } = require('../pageobjects/MyCartPage');
 const { CheckoutPage } = require('../pageobjects/CheckoutPage');
 const { OrderConfirmationPage } = require('../pageobjects/OrderConfirmationPage');
-const { OrdersListPage } = require('../pageobjects/OrderListPage');
+const { OrdersListPage } = require('./OrdersListPage');
 const { OrderSummaryPage } = require('../pageobjects/OrderSummaryPage');
 
 class POManager {
