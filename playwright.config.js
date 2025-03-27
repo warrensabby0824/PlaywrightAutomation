@@ -6,7 +6,7 @@ import {defineBddConfig} from 'playwright-bdd';
 
 const testDir = defineBddConfig({
   importTestFrom: 'fixtures/fixtures.js',
-  paths: ['features/Ecommerce.feature'],
+  paths: ['features/**.feature'],
   require: ['features/step_definitions/steps2.js'],
   disableWarnings: { importTestFrom: true }
 })
