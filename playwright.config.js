@@ -1,7 +1,13 @@
 // @ts-check
 import { defineConfig, devices } from '@playwright/test';
 import dotenv from 'dotenv';
-import path from 'path';
+
+import {defineBddConfig} from 'playwright-bdd';
+
+const testDir = defineBddConfig({
+  paths: ['features/Ecommerce.feature'],
+  require: ['features/step_definitions/steps2.js']
+})
 
 dotenv.config({
   path: `./utils/env/.env.${process.env.ENV}`,
@@ -18,7 +24,8 @@ dotenv.config({
  * @see https://playwright.dev/docs/test-configuration
  */
 export default defineConfig({
-  testDir: './tests',
+  //testDir: './tests',
+  testDir,
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
