@@ -1,13 +1,12 @@
 // @ts-check
 import { defineConfig, devices } from '@playwright/test';
 import dotenv from 'dotenv';
-
 import {defineBddConfig} from 'playwright-bdd';
 
 const testDir = defineBddConfig({
   importTestFrom: 'fixtures/fixtures.js',
-  paths: ['features/**.feature'],
-  require: ['features/step_definitions/steps2.js'],
+  paths: ['features/*.feature'],
+  require: ['features/step_definitions/*steps.js'],
   disableWarnings: { importTestFrom: true }
 })
 

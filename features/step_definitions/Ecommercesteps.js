@@ -11,8 +11,7 @@ let latestUsername;
 let orderID;
 
 Given('User login to the application with {string} and {string}', async ({loginPage}, username, password) => {
-     console.log(process.env.URL);
-     await loginPage.goToLoginPage();
+     await loginPage.goToLoginPage(process.env.URL);
      await loginPage.validLogin(username, password);
    
      latestUsername = username;
@@ -86,7 +85,7 @@ Given('User login to the application with {string} and {string}', async ({loginP
 
    }, token);
      
-     await loginPage.goToLoginPage();
+     await loginPage.goToLoginPage(process.env.URL);
    });
    
    When('User search for the newly created order via API in the Orders page and view its details', async ({dashboardPage,ordersListPage}) => {

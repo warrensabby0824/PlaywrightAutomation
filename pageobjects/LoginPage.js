@@ -8,9 +8,8 @@ class LoginPage {
 
     }
 
-async goToLoginPage(){
-    console.log(process.env.URL);
-    await this.page.goto("https://rahulshettyacademy.com/client");
+async goToLoginPage(url){
+    await this.page.goto(url);
 }
 
 async validLogin(userEmail,userPassword) {
