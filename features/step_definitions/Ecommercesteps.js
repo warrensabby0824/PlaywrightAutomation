@@ -2,7 +2,6 @@ import { createBdd } from 'playwright-bdd';
 import {test} from '../../fixtures/fixtures';
 const {Given,When,Then} = createBdd(test);
 const { expect, request } = require('@playwright/test');
-const { POManager } = require('../../pageobjects/POManager');
 const { APIUtils } = require('../../utils/APIUtils');
 const loginPayloadjson = JSON.parse(JSON.stringify(require("../../utils/loginPayLoad.json")));
 const orderCreationPayloadjson = JSON.parse(JSON.stringify(require("../../utils/orderCreationPayLoad.json")));
