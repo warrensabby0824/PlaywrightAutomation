@@ -10,7 +10,8 @@
     "wamAPITest": "npx cucumber-js --tags=@api --exit",
     "bddgen": "npx bddgen",
     "playwrighttest": "npx playwright test --headed",
-    "test": "npm run bddgen && npm run playwrighttest"
+    "test": "npm run bddgen && npm run playwrighttest",
+    "testing":"npx bddgen --tags '@Regression' ; npx cross-env ENV=qa npx playwright test"
   },
   "keywords": [],
   "author": "",
