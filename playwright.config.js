@@ -13,6 +13,7 @@ import {defineBddConfig} from 'playwright-bdd';
 const testDir = defineBddConfig({
   features: 'features/*.feature',
   steps: ['features/step_definitions/*steps.js','fixtures/fixtures.js'],
+  verbose: true,
 })
 
 dotenv.config({
