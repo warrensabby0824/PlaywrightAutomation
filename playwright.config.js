@@ -64,16 +64,38 @@ export default defineConfig({
   },
 
   /* Configure projects for major browsers */
-  // projects: [
-  //   {
-  //     name: 'chromium',
-  //     use: { ...devices['Desktop Chrome'] },
-  //   },
+  projects: [
+    {
+      name: 'chromium',
+      use: {
+        browserName: 'chromium',
+        headless: false,
+        screenshot: 'on',
+        trace: 'on',//'retain-on-failure'
+        //viewport: {width:720,height:720}
+      }
+    },
 
-    // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    // },
+    {
+      name: 'firefox',
+      use: {
+        browserName: 'firefox',
+        headless: false,
+        screenshot: 'on',
+        trace: 'on',//'retain-on-failure'
+        //viewport: {width:720,height:720}
+      }
+    },
+    {
+      name: 'safari',
+      use: {
+        browserName: 'webkit',
+        headless: false,
+        screenshot: 'on',
+        trace: 'on',//'retain-on-failure'
+        //viewport: {width:720,height:720}
+      }
+    },
 
     // {
     //   name: 'webkit',
@@ -99,7 +121,7 @@ export default defineConfig({
     //   name: 'Google Chrome',
     //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
     // },
-  // ],
+  ],
 
   /* Run your local dev server before starting the tests */
   // webServer: {
