@@ -1,0 +1,3 @@
+{
+     "cucumberautocomplete.steps":["features/step_definitions/*.js"]
+}
