@@ -66,7 +66,7 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
+      name: 'chrome',
       use: {
         browserName: 'chromium',
         headless: false,
