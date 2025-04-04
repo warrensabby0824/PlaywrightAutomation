@@ -3,8 +3,8 @@ import { test } from "../../fixtures/fixtures.js";
 
 test.describe('E-commerce validation', () => {
 
-  test('Placing order without login in UI', { tag: ['@api'] }, async ({ Given, loginPage, page, When, dashboardPage, ordersListPage, Then, orderSummaryPage }) => { 
-    await Given('User opens the shopping page', null, { loginPage, page }); 
+  test('Placing order without login in UI', { tag: ['@api'] }, async ({ Given, loginPage, page, api, When, dashboardPage, ordersListPage, Then, orderSummaryPage }) => { 
+    await Given('User opens the shopping page', null, { loginPage, page, api }); 
     await When('User search for the newly created order via API in the Orders page and view its details', null, { dashboardPage, ordersListPage }); 
     await Then('Order details will be displayed correctly in the Order Summary page for orders created in API', {"dataTable":{"rows":[{"cells":[{"value":"expectedOrderSummaryPageTitle"}]},{"cells":[{"value":"order summary"}]}]}}, { orderSummaryPage }); 
   });

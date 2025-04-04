@@ -6,7 +6,7 @@ import {MyCartPage} from '../pageobjects/MyCartPage';
 import {OrderConfirmationPage} from '../pageobjects/OrderConfirmationPage';
 import {OrdersListPage} from '../pageobjects/OrdersListPage';
 import {OrderSummaryPage} from '../pageobjects/OrderSummaryPage';
-const { APIUtils } = require('../../PLAYWRIGHT AUTOMATION/utils/APIUtils');
+const { APIUtils } = require('../utils/APIUtils');
 const { request } = require('@playwright/test');
 
 export const test = base.extend(({
