@@ -6,6 +6,8 @@ import {MyCartPage} from '../pageobjects/MyCartPage';
 import {OrderConfirmationPage} from '../pageobjects/OrderConfirmationPage';
 import {OrdersListPage} from '../pageobjects/OrdersListPage';
 import {OrderSummaryPage} from '../pageobjects/OrderSummaryPage';
+const { APIUtils } = require('../../PLAYWRIGHT AUTOMATION/utils/APIUtils');
+const { request } = require('@playwright/test');
 
 export const test = base.extend(({
      loginPage: async({page},use)=> {
@@ -36,4 +38,9 @@ export const test = base.extend(({
           const orderSummaryPage = new OrderSummaryPage(page);
           await use(orderSummaryPage);
      },
+     api: async({},use)=> {
+          const apiContext = await request.newContext();
+          const apiUtils = new APIUtils(apiContext);
+          await use(apiUtils);
+     }
 }))

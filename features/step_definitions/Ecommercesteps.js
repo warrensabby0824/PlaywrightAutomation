@@ -71,12 +71,10 @@ Given('User login to the application with {string} and {string}', async ({loginP
      }
    });
    
-   Given('User opens the shopping page', async ({loginPage, page}) => {
-     const apiContext = await request.newContext();
-     const apiUtils = new APIUtils(apiContext);
-
-     const token = await apiUtils.getToken(loginPayloadjson);
-     orderID = await apiUtils.createOrder(orderCreationPayloadjson,token);
+   Given('User opens the shopping page', async ({loginPage, page, api}) => {
+    
+     const token = await api.getToken(loginPayloadjson);
+     orderID = await api.createOrder(orderCreationPayloadjson,token);
     
      await page.addInitScript(value => {
 
