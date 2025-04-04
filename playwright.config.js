@@ -84,6 +84,7 @@ export default defineConfig({
         screenshot: 'on',
         trace: 'on',//'retain-on-failure'
         //viewport: {width:720,height:720}
+        // ...devices['']
       }
     },
     {

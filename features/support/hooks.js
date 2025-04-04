@@ -17,7 +17,7 @@ Before(async function () {
     this.poManager = new POManager(this.page);
   });
   
-Before({tags: "@api"}, async function () {
+Before({tags: "@apix"}, async function () {
   const apiContext = await request.newContext();
   const apiUtils = new APIUtils(apiContext);
   this.token = await apiUtils.getToken(loginPayLoad);
