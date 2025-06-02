@@ -11,7 +11,7 @@
     "bddgen": "npx bddgen",
     "playwrighttest": "npx playwright test --headed",
     "test": "npm run bddgen && npm run playwrighttest",
-    "testing":"npx bddgen --tags '@Regression' ; npx cross-env ENV=qa npx playwright test"
+    "testing": "npx bddgen --tags '@Regression' ; npx cross-env ENV=qa npx playwright test"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +19,7 @@
   "description": "",
   "type": "commonjs",
   "devDependencies": {
+    "@azure/microsoft-playwright-testing": "^1.0.0-beta.7",
     "@cucumber/cucumber": "^11.2.0",
     "@playwright/test": "^1.50.1",
     "@types/node": "^22.13.4",
